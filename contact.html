@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="CSS/bootstrap.css" />
+    <link rel="stylesheet" href="CSS/contact.css" />
+    <script
+      src="https://kit.fontawesome.com/ae3d34b0bb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="header">
+      <div class="container">
+        <nav>
+          <img class="logo" id="HomePage" src="images/logo.png" alt="logo" />
+          
+          <div class="nav-btns">
+            <div class="btn btn-alpha" id="loginButton">Login</div>
+            <div class="btn btn-beta" id="signUpButton">Sign Up</div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- -----------------Contact------------------- -->
+    <div id="contact">
+      <div class="container">
+        <h3>Get in Touch Today</h3>
+        <p>
+          Each donation can help save more than one life ina second. <br />
+          Every 2 second someone need blood.
+        </p>
+        <div class="login-divide">
+          <div class="left">
+            <form name="submit-to-google-sheet">
+              <div class="alpha">
+                <div class="field">
+                  <label for="Name">Name</label>
+                  <input type="text" name="Name" placeholder="Your Name" />
+                </div>
+
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input
+                    class="email"
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                  />
+                </div>
+              </div>
+
+              <div class="alpha">
+                <div class="field">
+                  <label for="">Leave Us Message</label>
+                  <textarea
+                    name="Message"
+                    rows="6"
+                    placeholder="Your Message"
+                  ></textarea>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-beta">Submit</button>
+            </form>
+            <span id="msg"></span>
+          </div>
+          <div class="right"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- -------------footer------------ -->
+    <div id="footer">
+      <div class="container">
+        <div class="footer-list">
+          <div class="footer-col">
+            <h4>
+              <img src="images/logo1.png" alt="" />
+            </h4>
+          </div>
+          <div class="footer-col">
+            <h4>Learn Now</h4>
+            <ul>
+              <li><a href="">About US</a></li>
+              
+              <li><a href="">Environment</a></li>
+             
+              <li><a href="">Privacy Policy</a></li>
+              <li><a href="">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Donation</h4>
+            <ul>
+              <li><a href="">Cells Donation</a></li>
+              <li><a href="">R+ BHV</a></li>
+              <li><a href="">O-</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="">Donation: 123-456-789</a></li>
+              <li><a href="">Office: 123-456-789</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+              <a href="https://facebook.com/"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href=""><i class="fab fa-twitter-square"></i></a>
+              <a href=""><i class="fab fa-instagram"></i></a>
+              <a href=""><i class="fab fa-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById('loginButton')
+        .addEventListener('click', function () {
+          window.location.href = 'login.php';
+        });
+      document
+        .getElementById('signUpButton')
+        .addEventListener('click', function () {
+          window.location.href = 'signup.php';
+        });
+      document
+        .getElementById('HomePage')
+        .addEventListener('click', function () {
+          window.location.href = 'index.html';
+        });
+
+      const scriptURL =
+        'https://script.google.com/macros/s/AKfycbzfx6UeJ7AKUWGl4B24HsMEpADiQ4tYi8ulFaPBUjYhH2XC8gL7h2G1orjqmVoTsYWZVw/exec';
+      const form = document.forms['submit-to-google-sheet'];
+      const msg = document.getElementById('msg');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+          .then((response) => {
+            msg.innerHTML = 'Message Sent succesfully';
+            setTimeout(function () {
+              msg.innerHTML = '';
+            }, 5000);
+            form.reset();
+          })
+          .catch((error) => console.error('Error!', error.message));
+      });
+    </script>
+  </body>
+</html>
